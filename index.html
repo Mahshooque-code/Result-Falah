@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MADRASATHUL FALAH RESULT</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cambria:wght@400;600&display=swap');
+        body { font-family: 'Cambria', serif; text-align: center; background-color: #E0F7FA; }
+        .container { max-width: 400px; margin: 10px auto; padding: 20px; background: #FFFFFF; border: 2px solid #007BFF; border-radius: 10px; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); }
+        input, select { width: 95%; padding: 10px; margin: 10px 0; border: 2px solid #007BFF; border-radius: 5px; font-size: 16px; font-family: 'Cambria', serif; }
+        button { width: 100%; padding: 10px; background: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-family: 'Cambria', serif; font-weight: 600; }
+        button:hover { background: #0056B3; }
+        .result { margin-top: 20px; padding: 15px; border: 2px solid #007BFF; display: none; border-radius: 5px; background: #FFFFFF; text-align: left; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
+        .pass { color: green; font-weight: bold; }
+        .fail { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="color: #007BFF;">MADRASATHUL FALAH RESULT</h2>
+        <input type="text" id="regNo" placeholder="ENTER UID NUMBER">
+        <select id="classSelect">
+            <option value="">SELECT CLASS</option>
+            <option value="1">CLASS 1</option>
+            <option value="2">CLASS 2</option>
+            <option value="3">CLASS 3</option>
+            <option value="4">CLASS 4</option>
+        </select>
+        <button onclick="fetchResult()">SEARCH RESULT</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        const studentResults = {
+            "C09316001": { name: "ALIYA FATHIMA", class: "1", result: "PASS" },
+            "C09316002": { name: "AJSAL RAHMAN", class: "1", result: "PASS" },
+            "D05667010": { name: "SHAHIR", class: "1", result: "PASS" },
+            "E09316001": { name: "ISHA MEHRIN M S", class: "1", result: "PASS" },
+            "E09316002": { name: "ABDUL AZEEM SYED MUHAMMED K I", class: "1", result: "PASS" },
+            "E09316004": { name: "MOHAMMED RISHAN J", class: "1", result: "PASS" },
+            "E09316005": { name: "ANSHA ARIF", class: "1", result: "FAIL" },
+            "E09316006": { name: "MOHAMMAD SHAMMAS", class: "1", result: "PASS" },
+            "A09316002": { name: "AKBAR ALI", class: "2", result: "FAIL" },
+            "B09316002": { name: "AJMAL AHAMED", class: "2", result: "PASS" },
+            "B09316010": { name: "IFRAH", class: "2", result: "PASS" },
+            "C09316007": { name: "MOHAMMAD SHERIF", class: "2", result: "FAIL" },
+            "C09316008": { name: "DILSHAD", class: "2", result: "FAIL" },
+            "D09316001": { name: "AYRA R", class: "2", result: "PASS" },
+            "D09316002": { name: "NIDA FATHIMA", class: "2", result: "PASS" },
+            "A09316004": { name: "SAHAL S", class: "3", result: "FAIL" },
+            "A09316005": { name: "MUHAMMED AFSAL", class: "3", result: "FAIL" },
+            "A09316006": { name: "JEWANA TAHLEEM K I", class: "3", result: "PASS" },
+            "B05667018": { name: "SHALIF", class: "3", result: "PASS" },
+            "B09316001": { name: "K ALFIYA", class: "3", result: "PASS" },
+            "B09316004": { name: "K S HUSNA FATHIMA", class: "3", result: "PASS" },
+            "B09316005": { name: "ASNA FATHIMA KS", class: "3", result: "PASS" },
+            "C09316004": { name: "MOHAMMAD YASHIF", class: "3", result: "PASS" },
+            "A09316001": { name: "MUHAMMED SHAZIN", class: "4", result: "PASS" },
+            "A09316010": { name: "SHEAID IBRAHIM", class: "4", result: "PASS" },
+            "B01857029": { name: "MUHAMMED JASIM J", class: "4", result: "PASS" },
+            "B02037016": { name: "MAHIR VAJEEH K T", class: "4", result: "PASS" },
+            "B09316003": { name: "HIYA FATHIMA M K", class: "4", result: "PASS" }
+        };
+
+        function fetchResult() {
+            const regNo = document.getElementById('regNo').value;
+            const selectedClass = document.getElementById('classSelect').value;
+            const resultDiv = document.getElementById('result');
+            
+            if (studentResults[regNo] && studentResults[regNo].class === selectedClass) {
+                const student = studentResults[regNo];
+                
+                resultDiv.innerHTML = `<strong>NAME:</strong> ${student.name}<br>
+                                       <strong>CLASS:</strong> ${student.class}<br>
+                                       <strong>RESULT:</strong> <span class="${student.result === 'PASS' ? 'pass' : 'fail'}">${student.result}</span>`;
+            } else {
+                resultDiv.innerHTML = "<span class='fail'>NO RESULTS FOUND.</span>";
+            }
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
